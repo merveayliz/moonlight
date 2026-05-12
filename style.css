@@ -1,0 +1,374 @@
+/* --- TEMEL AYARLAR --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif; /* Soft ve yuvarlak hatlı bir font */
+}
+
+:root {
+    --soft-purple: #9b89b3; /* Yumuşak mor */
+    --soft-gray: #f2f2f2;   /* Temiz gri */
+    --soft-orange: #ffb380; /* Ay ışığı turuncusu */
+    --night-bg: #fdfbff;    /* Çok açık morumsu beyaz arka plan */
+}
+
+body {
+    background-color: var(--night-bg);
+    color: #444;
+    overflow-x: hidden;
+}
+
+/* --- GİRİŞ ANİMASYONU --- */
+#intro-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #1a1a2e; /* Gece mavisi/mor arası */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeOut 1s ease forwards 2.5s;
+}
+
+.intro-text {
+    color: var(--soft-orange);
+    font-size: 3rem;
+    letter-spacing: 15px;
+    opacity: 0;
+    animation: fadeInText 1.5s ease forwards 0.5s;
+}
+
+@keyframes fadeInText {
+    to { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* --- HEADER --- */
+.header {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px); /* Cam efekti */
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--soft-purple);
+    letter-spacing: 2px;
+}
+
+/* Dropdown Menü Stilleri */
+.dropbtn {
+    background: none; border: none;
+    font-size: 1rem; font-weight: 600;
+    color: #555; cursor: pointer;
+    transition: 0.3s;
+}
+
+.dropdown { position: relative; display: inline-block; }
+.dropdown-content {
+    display: none; position: absolute;
+    background: white; min-width: 160px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-radius: 10px; right: 0;
+}
+.dropdown-content a {
+    color: #555; padding: 12px 16px;
+    text-decoration: none; display: block;
+}
+.dropdown:hover .dropdown-content { display: block; }
+
+/* --- ÜRÜN KARTLARI --- */
+.content { padding: 120px 5% 50px; }
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+/* --- 1. ÜRÜN KARTLARI İÇİN TURUNCU PARLAMA --- */
+.product-card {
+    background: white;
+    border-radius: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    transition: all 0.4s ease; /* Tüm geçişleri yumuşatır */
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    /* Hafif derinlik ve turuncu parlama efekti */
+    box-shadow: 0 10px 25px rgba(255, 179, 128, 0.3); 
+    border-color: var(--soft-orange);
+}
+
+/* --- 2. NAVİGASYON BUTONLARI MOR HOVER --- */
+.dropbtn:hover {
+    color: var(--soft-purple) !important;
+    text-shadow: 0 0 5px rgba(155, 137, 179, 0.4);
+}
+
+.dropdown-content a:hover {
+    background-color: #f9f7fc; /* Çok açık mor arka plan */
+    color: var(--soft-purple);
+}
+
+.product-card img {
+    width: 100%; border-radius: 15px;
+    aspect-ratio: 1/1; object-fit: cover;
+}
+
+/* --- MODAL STİLLERİ --- */
+.modal {
+    display: none; position: fixed;
+    z-index: 2000; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white; margin: 5% auto;
+    width: 90%; max-width: 800px;
+    border-radius: 25px; position: relative;
+    padding: 30px; animation: modalOpen 0.5s;
+}
+
+@keyframes modalOpen {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal {
+    position: absolute; 
+    right: 25px; 
+    top: 15px;
+    font-size: 30px; 
+    cursor: pointer; 
+    color: var(--soft-purple);
+}
+
+.modal-body { display: flex; gap: 30px; flex-wrap: wrap; }
+
+#modalImage { width: 100%; max-width: 350px; border-radius: 15px; }
+
+.modal-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+
+.buy-btn {
+    display: inline-block; 
+    padding: 15px;
+    background:#a057db; 
+    color: white;
+    text-decoration: none; 
+    border-radius: 12px;
+    text-align: center;
+     margin-top: 20px; 
+     font-weight: 700;
+}
+.buy-btn:hover{ background-color: #480579e9;}
+/* --- FİLTRE BUTONLARI TASARIMI --- */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+    padding: 0 5%;
+}
+
+.filter-btn {
+    padding: 10px 25px;
+    border: 2px solid var(--soft-purple);
+    background: transparent;
+    color: var(--soft-purple);
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Aktif buton veya Hover durumu */
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--soft-purple);
+    color: white;
+    box-shadow: 0 5px 15px rgba(155, 137, 179, 0.3);
+    transform: translateY(-2px);
+}
+
+
+/* --- 3. FOOTER VE SENİN İMZAN --- */
+.footer {
+    padding: 60px 20px;
+    background-color: #fcfcfc;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.footer p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.footer strong {
+    color: var(--soft-purple);
+    letter-spacing: 1px;
+}
+
+/* Sosyal Medya İkonları */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-links a {
+    font-size: 1.8rem;
+    color: #888;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Zıplama efekti verir */
+    text-decoration: none;
+}
+
+/* İkonlar havaya kalksın ve kendi renklerini alsınlar */
+.social-links a:hover {
+    transform: translateY(-12px) scale(1.2); /* Hem yukarı kalkar hem büyür */
+}
+
+/* Her ikonun kendi rengi */
+.social-links a.li:hover { color: #0077b5; } /* LinkedIn Mavisi */
+.social-links a.gh:hover { color: #333; }    /* GitHub Siyahı */
+.social-links a.wa:hover { color: #25d366; } /* WhatsApp Yeşili */
+.social-links a.ig:hover { color: #e1306c; } /* Instagram Pembesi */
+
+
+/* --- MOBİL UYUMLULUK AYARLARI (Media Query) --- */
+@media (max-width: 768px) {
+    /* 1. Header & Navigasyon */
+    .header {
+        padding: 15px 4%;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .dropbtn {
+        font-size: 0.85rem;
+    }
+
+    /* 2. Giriş Animasyonu Yazısı */
+    .intro-text {
+        font-size: 1.8rem;
+        letter-spacing: 8px;
+    }
+
+    /* 3. Filtre Butonları (Kaydırılabilir yaptık) */
+    .filter-container {
+        justify-content: flex-start; /* Sola yasla */
+        overflow-x: auto; /* Yanlamasına kaydırılabilir olsun */
+        white-space: nowrap; /* Butonlar aşağı sarkmasın */
+        padding: 0 4% 15px;
+        -webkit-overflow-scrolling: touch; /* Mobilde akıcı kaydırma */
+    }
+
+    .filter-btn {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+        flex: 0 0 auto; /* Butonların ezilmesini engeller */
+    }
+    
+    .product-grid {
+        display: grid !important; /* Grid olduğundan emin olalım */
+        grid-template-columns: repeat(3, 1fr) !important; /* Zorla 3 sütun yap */
+        gap: 5px; /* Boşluğu iyice daraltalım ki sığmama riski kalmasın */
+        padding: 0 5px;
+        width: 100%;
+    }
+
+    .product-card {
+        padding: 4px; 
+        min-width: 0; /* İçeriğin kartı genişletmesini engeller, kutuyu sabit tutar */
+    }
+
+    .product-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1; /* Resimleri kare tutar ki yan yana düzgün dursunlar */
+        object-fit: cover;
+    }
+
+    .product-card h3 {
+        font-size: 0.6rem; /* Yazı hala büyük gelip kartı itiyor olabilir, biraz daha küçülttük */
+        white-space: nowrap; /* Yazı alt satıra geçip kartı uzatmasın */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Sığmayan yazıyı ... yapar */
+    }
+    .product-card p {
+        font-size: 0.75rem; /* Fiyat yazısı boyutu */
+    }
+
+    /* 5. Modal (Ürün Detay Penceresi) */
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .modal-body {
+        flex-direction: column; /* Resim ve yazıyı alt alta getir */
+        gap: 15px;
+    }
+
+    #modalImage {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .modal-info h2 {
+        font-size: 1.3rem;
+    }
+/* --- FOOTER KÜÇÜLTME --- */
+    .footer {
+        padding: 25px 10px; /* Üst ve alt boşluğu ciddi oranda azalttık */
+    }
+
+    .footer p {
+        font-size: 0.8rem; /* "By Designer" yazısını küçülttük */
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    .social-links {
+        gap: 15px; /* İkonların arasını biraz yaklaştırdık */
+    }
+
+    .social-links a {
+        font-size: 1.4rem; /* Simgeler aynı kalsın demiştin ama hafif dokunduk denge için */
+    }
+}
+
+/* Çok küçük ekranlar için (Örn: iPhone SE) */
+@media (max-width: 400px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* Ürünler tekli listelensin */
+    }
+}
