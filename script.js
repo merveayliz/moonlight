@@ -29,12 +29,10 @@ const products = [
     { id: 25, name: "Ay Işığı Atkı",category: "peluş", isBestSeller: false , desc: "Gece şıklığı ve sıcaklık bir arada.", price: "300 TL", img: "img/888.jpg" }
 ];
 
-// Filtreleme Fonksiyonu
 function filterProducts(category) {
     const productList = document.getElementById('product-list');
-    productList.innerHTML = ""; // Önce ekranı temizle
+    productList.innerHTML = ""; 
 
-    // Butonların aktiflik durumunu güncelle
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => {
         btn.classList.remove('active');
@@ -43,7 +41,6 @@ function filterProducts(category) {
         }
     });
 
-    // Filtrele ve ekrana bas
     products.forEach(product => {
         let show = false;
         if (category === 'tümü') show = true;
@@ -66,7 +63,6 @@ function filterProducts(category) {
     });
 }
 
-// Sayfa ilk açıldığında tümünü göster
 window.onload = () => filterProducts('tümü');
 
 
@@ -104,7 +100,7 @@ function openModal(product) {
     modalPrice.innerText = product.price;
 
     const message = `Merhaba Ayliz! Moonlight sitemden "${product.name}" ürününü gördüm ve sipariş vermek istiyorum.`;
-    modalWA.href = `https://wa.me/905439676661?text=${encodeURIComponent(message)}`;
+    modalWA.href = `https://wa.me/0256321?text=${encodeURIComponent(message)}`;
 
     modal.style.display = "block";
     document.body.style.overflow = "hidden"; 
